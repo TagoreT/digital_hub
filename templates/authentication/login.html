@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'login/login.css'%}">
+</head>
+<body>
+    <div class="login-img">
+        <img src="{% static 'login/login_img.png' %}" alt="" class="src">
+    </div>
+    <div class="container">
+        <div class="jntu-img">
+            <img src="{% static 'login/logo.png' %}" alt="" class="src" height="120px" width="120px">
+        </div>
+        <hr>
+        <div class="name">
+            <h3>Digital Hub</h3>
+        </div>
+        <hr style="margin-bottom:10px;">
+        <form method="post" action="{% url 'authentication:login'%}" class="login-form">
+            {%csrf_token%}
+            <div class="email-div">
+                    <!-- <label for="email">Email</label> -->
+                    <input type="email" name="email" id="" placeholder="Enter email">
+            </div>
+            <div class="password-div">
+                <!-- <label for="password">Password</label> -->
+                <input type="password" name="password" id="" placeholder="Enter password">
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+            </div>
+            <div class="submit-button">
+                <input type="submit" value="Submit">
+            </div>
+            <div class="sign-up">
+                <span>Don't have an account <a href="#" id="popup-link">SignUp</a></span>
+            </div>
+            <div class="new-links-container" id="new-links">
+            </div>
+        </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    // Function to add two new links below the "Sign Up" link
+    function addNewLinks() {
+        const newLinksContainer = document.getElementById('new-links');
+        
+        // Create the first new anchor tag
+        const newLink1 = document.createElement('a');
+        newLink1.href = '/auth/studentRegistration';
+        newLink1.textContent = 'As a student';
+        
+
+        // Create the second new anchor tag
+        const newLink2 = document.createElement('a');
+        newLink2.href = '/auth/mentorRegistration';
+        newLink2.textContent = 'As a mentor';
+        
+
+        // Append the new anchor tags to the container
+        newLinksContainer.appendChild(newLink1);
+        newLinksContainer.appendChild(newLink2);
+    }
+
+    // Event listener for the "Sign Up" link click
+    document.getElementById('popup-link').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+        addNewLinks(); // Add two new links below the "Sign Up" link
+    });
+</script>
+</html>
